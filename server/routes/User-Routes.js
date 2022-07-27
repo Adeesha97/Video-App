@@ -8,11 +8,12 @@ import {
   unsubscribe,
   updateUser,
 } from "../controllers/User-Controllers.js";
+import { verifyToken } from "../verifyToken.js";
 
 const router = express.Router();
 
 // UPDATE USER
-router.put("/:id", updateUser);
+router.put("/:id", verifyToken, updateUser);
 
 // DELETE USER
 router.delete("/:id", deleteUser);
