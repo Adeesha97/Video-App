@@ -19,6 +19,6 @@ router.put("/:id", verifyToken, updateComment);
 router.delete("/:videoId", verifyToken, deleteComment);
 
 // GET Comment
-router.get("/find/:id", getComment);
+router.get("/:videoId", getComment);
 
 export default router;
