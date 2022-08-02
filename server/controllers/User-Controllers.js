@@ -1,5 +1,6 @@
 import { createError } from "../error.js";
 import User from "../models/User.js";
+import Video from "../models/Video.js";
 
 // UPDATE USER
 export const updateUser = async (req, res, next) => {
@@ -77,7 +78,14 @@ export const unsubscribe = async (req, res, next) => {
 
 // LIKE A VIDEO
 export const like = async (req, res, next) => {
+  const id = req.user.id;
+  const videoId = req.params.videoId;
   try {
+    await Video.findByIdAndUpdate(videoId, {
+      $addToSet: { likes: id },
+      $pull: { dislikes: id },
+    });
+    res.status(200).json("Video has been liked.");
   } catch (err) {
     next(err);
   }
@@ -85,7 +93,14 @@ export const like = async (req, res, next) => {
 
 // DISLIKE A VIDEO
 export const dislike = async (req, res, next) => {
+  const id = req.user.id;
+  const videoId = req.params.videoId;
   try {
+    await Video.findByIdAndUpdate(videoId, {
+      $addToSet: { dislikes: id },
+      $pull: { likes: id },
+    });
+    res.status(200).json("Video has been disliked.");
   } catch (err) {
     next(err);
   }
