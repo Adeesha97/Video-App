@@ -44,3 +44,8 @@ export const signin = async (req, res, next) => {
     next(err);
   }
 };
+
+export const googleAuth = async (req, res, next) => {
+  try {
+  } catch (err) {}
+};
