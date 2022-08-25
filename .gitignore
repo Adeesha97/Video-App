@@ -36,6 +36,7 @@
 # production
 /frontend/build
 
+
 # misc
 .env
 /frontend/.env
